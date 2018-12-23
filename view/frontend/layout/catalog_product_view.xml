@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="product.info.main">
+        <block class="Magenman\CallToOrder\Block\Product\View\Extra" name="product.view.extra" template="Magenman_CallToOrder::product/view/extra.phtml" after="-">
+        </block>
+    </referenceContainer>
+</body>

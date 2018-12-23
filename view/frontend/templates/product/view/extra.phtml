@@ -1,0 +1,199 @@
+<?php /* @var $block \Magenman\CallToOrder\Block\Product\View\Extra */?>
+<?php
+$_product = $block->getProduct();
+$config = $block->getConfig();
+?>
+<?php if ($config['enable'] == 1) {?>
+<div class="product-info-price">
+    <div class="price-box price-final_price" data-role="priceBox" data-product-id="115">
+        <!-- Call back button -->
+        <div style="margin-bottom:30px; position:relative; min-width:320px;">
+            <img src="<?php echo $this->getViewFileUrl('Magenman_CallToOrder::images/callnow.jpg'); ?>"
+                 width="63" height="50">&nbsp;<strong style="color: blue; font-size: 17px; position: absolute; top: 9px;">
+                    <?php echo $config['phone']?></a></strong>
+
+            <span id="cto_separator" style="vertical-align: top; border-left: 2px solid rgb(204, 204, 204); margin-left: 10px; padding: 6px 0px; position: relative; top: 11px; left:127px;"></span>
+            <b class="right_tlp">
+                <button style="vertical-align: top; margin-bottom: 0px; font-size: 14px; box-shadow: 1px 2px 3px rgb(221, 221, 221);margin-left: 16px; margin-top: 4px;float: right;" type="button" title="Call back" class="action primary" id="product-callback-button">
+                    <span>Call back</span>
+                </button>
+            </b>
+        </div>
+        <!-- Call back button -->
+    </div>
+    <div class="product-info-stock-sku">
+    </div>
+</div>
+<?php } ?>
+<div  data-role="focusable-scope" id="popup-mpdal">
+    <div  data-role="focusable-scope" id="popup-mpdal">
+        <div class="modal-content" data-role="content">
+            <div id="popupmodal" style="">
+                <div style="margin-top:20px;">
+                    <div class="showerror"></div>
+                    <span class="check_comman" style="color: red"  hidden> <?php echo __("Registration false");?></span>
+                        <table id="callback" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                            <tr>
+                                <td style="width:20%;"><strong>Name</strong></td>
+                                <td>:</td>
+                                <td>
+                                    <input name="callback_name" id="callback_name" class="required-entry" value="" style="width:300px;" type="text">
+                                    <span class="check_name" style="color: red"  hidden> <?php echo __("Name not found");?></span>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:20%;"><strong>Email</strong></td>
+                                <td>:</td>
+                                <td>
+                                    <input name="callback_email" type="email" id="callback_email" class="required-entry" value="" style="width:300px;" type="text"><br/>
+                                    <span class="check_mail1" style="color: red"  hidden> <?php echo __("Email not true");?></span>
+                                    <span class="check_mail2" style="color: red"  hidden> <?php echo __("Email not input");?></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:20%;"><strong>Phone</strong></td>
+                                <td>:</td>
+                                <td>
+                                    <input name="callback_phone" type="number" id="callback_phone" class="required-entry" value="" style="width:300px;" type="text"><br/>
+                                    <span class="check_phone1" style="color: red"  hidden> <?php echo __("Phone not true");?></span>
+                                    <span class="check_phone2" style="color: red"  hidden> <?php echo __("Phone not input");?></span>
+                                </td>
+                            </tr>
+                            <?php if ($config['prefer_time'] == 1) { ?>
+                            <tr>
+                                <td style="width:20%;"><strong>Preferred time to call</strong></td>
+                                <td>:</td>
+                                <td>
+                                    <select name="cto_preferred_t1" id="cto_preferred_t1" style="width:80px;" >
+                                        <?php
+                                        for ($i=0; $i<=24; $i++) {
+                                            echo '<option>' . $i . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <select name="cto_preferred_t2" id="cto_preferred_t2" style="width:80px;" value-scope="10" >
+                                        <?php
+                                        for ($j=0; $j<=24; $j++) {
+                                            echo '<option>' . $j . '</option>';
+                                        }
+                                        ?>
+                                    </select><br/>
+                                    <span class="check_time1" style="color: red"  hidden> <?php echo __("Time register too late");?></span>
+                                    <span class="check_time2" style="color: red"  hidden> <?php echo __("You must select time");?></span>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                            <tr>
+                                <td style="width:20%;"><strong>Note</strong></td>
+                                <td>:</td>
+                                <td>
+                                    <input name="callback_note" type="text" id="callback_note" class="required-entry" value="" style="width:350px;" type="text"><br/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="save_date" id="submit_button">
+                            <button type="submit"><?php echo __('Save'); ?></button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Call Back Information',
+                buttons: [{
+                    text: $.mage.__('Continue'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#popup-mpdal'));
+            $("#product-callback-button").on('click',function(){
+                $("#popup-mpdal").modal("openModal");
+                $(this).remove();
+            });
+
+            var url = '<?php echo $block->getAjax(); ?>';
+
+            $("#submit_button").on('click',function(){
+                var name    = $("#callback_name").val();
+                var email   = $("#callback_email").val();
+                var phone   = $("#callback_phone").val();
+                var note    = $("#callback_note").val();
+                var time1   = $("#cto_preferred_t1").val();
+                var time2   = $("#cto_preferred_t2").val();
+
+                var dem = 0;
+
+                if(name != ''){
+                    dem = dem + 1;
+                }else{
+                    $(".check_name").show();
+                }
+                if(email != ''){
+                    var emailReg = /^([\w\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    if (!emailReg.test(email) ) {
+                        $(".check_mail1").show();
+                    } else {
+                        dem = dem + 1;
+                    }
+                }else{
+                    $(".check_mail2").show();
+                }
+
+                if(phone != ''){
+                    if(!$.isNumeric(phone)){
+                        $(".check_phone1").show();
+                    }else{
+                        dem = dem + 1;
+                    }
+                }else{
+                    $(".check_phone2").show();
+                }
+
+                if(dem != 3){
+                    $(".check_comman").show();
+                }else{
+                    $.ajax({
+                    type: "POST",
+                    url: url + '?name=' + name  + '&mail=' + email + '&note=' + note
+                    + '&phone=' + phone + '&time1=' + time1 + '&time2=' + time2
+                    + '&product_name=' + '<?php echo $_product->getName() ?>' 
+                    + '&product_id=' + '<?php echo $_product->getId() ?>',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: {form_key: '<?php echo $block->getFormKey() ?>'},
+                    success: function () {
+                        $("#popup-mpdal").modal("closeModal");
+                        var text = '<br/><br/>'+'<span style="color: blue"> <strong><?php echo __("You are now successfully registered");?></strong></span>';
+                        $(".right_tlp").append(text);
+                    },          
+                    showLoader: true
+                });
+                }
+            });
+        }
+    );
+</script>

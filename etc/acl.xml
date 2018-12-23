@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Catalog::catalog">
+                    <resource id="Magenman_CallToOrder::calltoorder" title="ProductManager Call" sortOrder="60">
+                        <resource id="Magenman_CallToOrder::manager" title="Call Back Manager"	/>
+                        <resource id="Magenman_CallToOrder::edit" title="Settings"	/>
+                        <resource id="Magenman_CallToOrder::report_manager" title="Report"/>
+                        <resource id="Magenman_CallToOrder::template" title="Email Templates"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magenman_CallToOrder::config_calltoorder" title="ProductManager setting"	/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

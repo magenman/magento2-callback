@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magenman_CallToOrder::calltoorder" title="Call Back Manager" module="Magenman_CallToOrder" sortOrder="60" parent="Magento_Catalog::catalog" resource="Magenman_CallToOrder::calltoorder"/>
+        <add id="Magenman_CallToOrder::manager" title="Manage Call Backs" module="Magenman_CallToOrder" sortOrder="70" parent="Magenman_CallToOrder::calltoorder" action="calltoorder/manager/" resource="Magenman_CallToOrder::manager"/>
+        <add id="Magenman_CallToOrder::edit" title="Settings" module="Magenman_CallToOrder" sortOrder="80" parent="Magenman_CallToOrder::calltoorder" action="adminhtml/system_config/edit/section/calltoorder_setting" resource="Magenman_CallToOrder::edit"/>
+        <add id="Magenman_CallToOrder::report_manager" title="Report" module="Magenman_CallToOrder" sortOrder="85" parent="Magenman_CallToOrder::calltoorder" action="calltoorder/report" resource="Magenman_CallToOrder::report_manager"/>
+        <add id="Magenman_CallToOrder::template" title="Email Templates" module="Magenman_CallToOrder" sortOrder="100" parent="Magenman_CallToOrder::calltoorder" action="calltoorder/template" resource="Magenman_CallToOrder::template"/>
+    </menu>
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magenman. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magenman\CallToOrder\Model\ResourceModel\Grid\Manager" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenman_call_to_order_manager</argument>
+            <argument name="resourceModel" xsi:type="string">Magenman\CallToOrder\Model\ResourceModel\Manager</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magenman\CallToOrder\Model\ResourceModel\Grid\Template" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenman_call_to_order_template</argument>
+            <argument name="resourceModel" xsi:type="string">Magenman\CallToOrder\Model\ResourceModel\Template</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="calltoorder_manager_listing_data_source" xsi:type="string">Magenman\CallToOrder\Model\ResourceModel\Grid\Manager</item>
+            </argument>
+        </arguments>
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="calltoorder_template_listing_data_source" xsi:type="string">Magenman\CallToOrder\Model\ResourceModel\Grid\Template</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

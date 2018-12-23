@@ -1,0 +1,8 @@
+<!--@subject Your ticket from {{var store.getFrontendName()}} @-->
+{{template config_path="design/email/header_template"}}
+<p>{{trans "Welcome to %store_name." store_name=$store.getFrontendName()}}</p>
+<ul>
+    <li><strong>{{trans "Product Name: "}}</strong> <em> {{var product}}</em></li>
+    <li> <em> {{var content}}</em></li>
+</ul>
+{{template config_path="design/email/footer_template"}}
